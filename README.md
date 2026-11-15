@@ -1,18 +1,40 @@
-# RUMLE WEB
-Original browser open-world crime game concept. Not affiliated with Rockstar Games.
+# RUMLE WEB 0.3
 
-## Run locally
+Оригинальный браузерный open-world прототип в сеттинге вымышленного города Новоград. Проект не связан с Rockstar Games.
+
+## Запуск
+
 ```bash
 npm install
 npm run dev
 ```
-Open http://localhost:3000
 
-## Deploy
-Import this repository into Vercel and deploy the Next.js frontend.
+Откройте http://localhost:3000.
 
-## PeerJS
-The online lobby currently demonstrates PeerJS ID connection and data messaging. Configure a PeerServer (or use the public PeerJS server for development) with `NEXT_PUBLIC_PEER_HOST`, `NEXT_PUBLIC_PEER_PORT`, `NEXT_PUBLIC_PEER_PATH`, and `NEXT_PUBLIC_PEER_SECURE`.
+## Проверка
 
-## Status
-Prototype scaffold: cinematic menu, procedural block-city scene, basic movement, PeerJS lobby/chat. This is not yet a finished AAA game; vehicle physics, missions, police AI, persistent saves, character models, and authoritative gameplay remain future implementation work.
+```bash
+npm run typecheck
+npm run build
+```
+
+## Управление в одиночной игре
+
+- `W A S D` или стрелки — движение.
+- `Shift` — ускорение/бег.
+- `E` — переключение между персонажем и автомобилем.
+- Кнопка «Меню» — возврат в главное меню.
+
+## RUMLE ONLINE
+
+Лобби использует PeerJS для прямого соединения и тестового чата. Для публичного релиза рекомендуется собственный PeerServer. На текущем этапе это ещё не синхронизированный многопользовательский игровой мир: позиции, транспорт, NPC и миссии между игроками пока не синхронизируются.
+
+## Состояние прототипа 0.3
+
+- Исправлен TypeScript alias `@/*`.
+- Обновлена сцена Новограда: кварталы, дороги, здания, пешеходы и движущийся трафик.
+- Добавлено базовое управление персонажем и переключение на автомобиль.
+- Добавлена патрульная машина как визуальный прототип.
+- PeerJS-лобби и текстовый обмен сообщениями сохранены.
+
+Это игровой прототип, а не законченная AAA-игра. Полноценная физика транспорта, ИИ полиции, система розыска, миссии, сохранения и синхронизация игрового мира онлайн требуют дальнейшей разработки.
