@@ -13,6 +13,7 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
 
   const stars = "★".repeat(player.wantedLevel) + "☆".repeat(5 - player.wantedLevel);
   const timeStr = `${String(time.hours).padStart(2, "0")}:${String(time.minutes).padStart(2, "0")}`;
+  const speedKmh = Math.round(player.speed * 12);
 
   return (
     <div className="hud-root">
@@ -24,6 +25,7 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
         <div className="hud-block money">₽ {player.money.toLocaleString("ru-RU")}</div>
         <div className="hud-block time">
           {timeStr} · {weatherLabel(weather)}
+          {player.inVehicleId ? ` · ${speedKmh} км/ч` : ""}
         </div>
       </div>
 
@@ -51,11 +53,15 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
               <li key={i}>{o}</li>
             ))}
           </ul>
+          <small style={{ color: "#8fdf8f" }}>Доберись до точки — задание закроется само</small>
         </div>
       )}
 
       <div className="hud-bottom">
-        <p>WASD · мышь · F — сесть/выйти · P — телефон · M — карта · Shift — бег</p>
+        <p>
+          WASD · мышь · <b>F</b> — сесть/выйти · P — телефон · Shift — бег
+          {player.inVehicleId ? " · вы в машине" : " · подойди к авто и нажми F"}
+        </p>
         <div className="hud-actions">
           <button onClick={togglePhone}>ТЕЛЕФОН</button>
           {onBack && <button onClick={onBack}>← МЕНЮ</button>}

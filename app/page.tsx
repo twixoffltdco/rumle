@@ -29,12 +29,7 @@ export default function Home() {
           </header>
           <section className="menu">
             <p className="eyebrow">ГОРОД. ЗАКОН. ВЫБОР.</p>
-            <button
-              onClick={() => {
-                resetPlayer();
-                setScreen("single");
-              }}
-            >
+            <button onClick={() => { resetPlayer(); setScreen("single"); }}>
               НОВАЯ ИГРА <span>↗</span>
             </button>
             <button onClick={() => setScreen("online")}>
@@ -46,9 +41,7 @@ export default function Home() {
             <button onClick={() => setScreen("credits")}>
               О ПРОЕКТЕ <span>↗</span>
             </button>
-            <footer>
-              OPEN SOURCE <i>•</i> BUILD 0.4 — GLOBAL GAMEPLAY
-            </footer>
+            <footer>OPEN SOURCE <i>•</i> BUILD 0.6 — NIGHT CITY</footer>
           </section>
           <div className="bottomNote">NOVOGRAD / 2026</div>
         </div>
@@ -68,33 +61,23 @@ export default function Home() {
         <div className="panel">
           <button className="back" onClick={() => setScreen("menu")}>← НАЗАД</button>
           <h2>НАСТРОЙКИ</h2>
-          <p>Выбор персонажа (влияет на модель):</p>
-          <div className="quality-btns" style={{ marginBottom: 20 }}>
+          <p>Персонаж:</p>
+          <div className="quality-btns" style={{ marginBottom: 20, maxWidth: 320 }}>
             <button onClick={() => setGender("male")}>Мужской</button>
             <button onClick={() => setGender("female")}>Женский</button>
           </div>
-         
-          <p>Качество графики настраивается в телефоне (P) во время игры.</p>
-          <p>Сохранения пишутся автоматически в localStorage браузера.</p>
+          <p>Качество графики — в телефоне (P) во время игры.</p>
+          <p>Сохранения пишутся в localStorage автоматически.</p>
         </div>
       )}
 
       {screen === "credits" && (
         <div className="panel">
           <button className="back" onClick={() => setScreen("menu")}>← НАЗАД</button>
-          <h2>RUMLE WEB 0.4</h2>
-          <p>
-            Оригинальный open-source open-world проект. Не связан с Rockstar Games,
-            GTA и любыми их торговыми марками, персонажами, картами или музыкой.
-          </p>
-          <p>
-            Город: Новоград. Технологии: Next.js 15, TypeScript, Three.js,
-            React Three Fiber, Zustand, PeerJS.
-          </p>
-          <p>
-            Версия 0.4: модульная архитектура, день/ночь, погода, розыск,
-            NPC с реакциями, транспорт, телефон, миссии, сохранения.
-          </p>
+          <h2>RUMLE WEB 0.6</h2>
+          <p>Оригинальный open-world проект. Не связан с Rockstar Games и GTA.</p>
+          <p>Ночной город, неон, окна, полицейский транспорт, езда (F), розыск, миссии, телефон.</p>
+          <p>Стек: Next.js · Three.js · React Three Fiber · PeerJS · Zustand</p>
         </div>
       )}
     </main>

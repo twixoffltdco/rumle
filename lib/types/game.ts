@@ -6,16 +6,17 @@ export interface PlayerState {
   health: number;
   stamina: number;
   money: number;
-  wantedLevel: number; // 0-5
+  wantedLevel: number;
   gender: Gender;
   inVehicleId: string | null;
   position: [number, number, number];
   rotationY: number;
+  speed: number;
 }
 
 export interface VehicleDef {
   id: string;
-  brand: string; // Vostok, Aura, VolgaX, Raiser, Nord, Vector, Orion, Kresta
+  brand: string;
   model: string;
   class: VehicleClass;
   color: string;
@@ -33,9 +34,9 @@ export interface WorldVehicle {
   position: [number, number, number];
   rotationY: number;
   velocity: number;
-  damaged: number; // 0-1
+  damaged: number;
   locked: boolean;
-  ownerId?: string; // player peer or "world"
+  ownerId?: string;
 }
 
 export interface NPC {
@@ -47,7 +48,6 @@ export interface NPC {
   color: string;
   speed: number;
   target?: [number, number, number];
-  lastSeenPlayer?: number;
 }
 
 export interface Mission {
@@ -58,16 +58,13 @@ export interface Mission {
   status: "available" | "active" | "completed" | "failed";
   reward: number;
   objectives: string[];
+  /** Simple world target for distance checks */
+  targetPos?: [number, number, number];
+  targetRadius?: number;
 }
 
 export interface GameTime {
   hours: number;
   minutes: number;
-  dayProgress: number; // 0-1
-}
-
-export interface PhoneApp {
-  id: string;
-  name: string;
-  icon: string;
+  dayProgress: number;
 }
