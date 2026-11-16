@@ -1,6 +1,7 @@
 export type Gender = "male" | "female";
 export type Weather = "clear" | "cloudy" | "rain" | "storm" | "fog";
 export type VehicleClass = "sedan" | "suv" | "sport" | "super" | "moto" | "truck" | "bus" | "police" | "special";
+export type OutfitId = "street" | "formal" | "sport" | "work";
 
 export interface PlayerState {
   health: number;
@@ -12,6 +13,17 @@ export interface PlayerState {
   position: [number, number, number];
   rotationY: number;
   speed: number;
+  /** Mask hides face from police memory */
+  maskOn: boolean;
+  outfit: OutfitId;
+}
+
+/** What police last "recorded" about the suspect */
+export interface PoliceMemory {
+  active: boolean;
+  sawMask: boolean;
+  outfit: OutfitId | null;
+  recordedAt: number;
 }
 
 export interface VehicleDef {
@@ -39,17 +51,6 @@ export interface WorldVehicle {
   ownerId?: string;
 }
 
-export interface NPC {
-  id: string;
-  position: [number, number, number];
-  rotationY: number;
-  state: "walk" | "idle" | "flee" | "call_police" | "talk" | "enter_vehicle";
-  gender: Gender;
-  color: string;
-  speed: number;
-  target?: [number, number, number];
-}
-
 export interface Mission {
   id: string;
   title: string;
@@ -58,7 +59,6 @@ export interface Mission {
   status: "available" | "active" | "completed" | "failed";
   reward: number;
   objectives: string[];
-  /** Simple world target for distance checks */
   targetPos?: [number, number, number];
   targetRadius?: number;
 }
@@ -67,4 +67,11 @@ export interface GameTime {
   hours: number;
   minutes: number;
   dayProgress: number;
+}
+
+export interface ClothingShop {
+  id: string;
+  name: string;
+  position: [number, number, number];
+  radius: number;
 }

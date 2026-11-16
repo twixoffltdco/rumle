@@ -7,13 +7,24 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
   const time = useGameStore((s) => s.time);
   const weather = useGameStore((s) => s.weather);
   const togglePhone = useGameStore((s) => s.togglePhone);
+  const toggleMask = useGameStore((s) => s.toggleMask);
   const activeMissionId = useGameStore((s) => s.activeMissionId);
   const missions = useGameStore((s) => s.missions);
+  const policeMemory = useGameStore((s) => s.policeMemory);
+  const isRecognized = useGameStore((s) => s.isRecognized);
+  const nearShopId = useGameStore((s) => s.nearShopId);
   const activeMission = missions.find((m) => m.id === activeMissionId);
+  const recognized = isRecognized();
 
   const stars = "★".repeat(player.wantedLevel) + "☆".repeat(5 - player.wantedLevel);
   const timeStr = `${String(time.hours).padStart(2, "0")}:${String(time.minutes).padStart(2, "0")}`;
   const speedKmh = Math.round(player.speed * 12);
+  const outfitLabel: Record<string, string> = {
+    street: "Улица",
+    formal: "Классика",
+    sport: "Спорт",
+    work: "Рабочая",
+  };
 
   return (
     <div className="hud-root">
@@ -24,8 +35,9 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
         </div>
         <div className="hud-block money">₽ {player.money.toLocaleString("ru-RU")}</div>
         <div className="hud-block time">
-          {timeStr} · {weatherLabel(weather)}
+          {timeStr}
           {player.inVehicleId ? ` · ${speedKmh} км/ч` : ""}
+          {player.maskOn ? " · МАСКА" : ""}
         </div>
       </div>
 
@@ -33,6 +45,11 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
         <div className="wanted">
           <span className="stars">{stars}</span>
           <small>РОЗЫСК</small>
+          {policeMemory.active && (
+            <small className={recognized ? "recog-hot" : "recog-cold"}>
+              {recognized ? "ОПОЗНАН" : "ОБЛИК НЕ СОВПАДАЕТ"}
+            </small>
+          )}
         </div>
       )}
 
@@ -53,31 +70,28 @@ export default function HUD({ onBack }: { onBack?: () => void }) {
               <li key={i}>{o}</li>
             ))}
           </ul>
-          <small style={{ color: "#8fdf8f" }}>Доберись до точки — задание закроется само</small>
+        </div>
+      )}
+
+      {nearShopId && (
+        <div className="shop-hint">
+          Магазин одежды — открой телефон (P) → Одежда
         </div>
       )}
 
       <div className="hud-bottom">
         <p>
-          WASD · мышь · <b>F</b> — сесть/выйти · P — телефон · Shift — бег
-          {player.inVehicleId ? " · вы в машине" : " · подойди к авто и нажми F"}
+          WASD · F — авто · <b>G</b> — маска · P — телефон · Shift — бег
+          <br />
+          Одежда: {outfitLabel[player.outfit] || player.outfit}
+          {player.maskOn ? " · маска надета" : ""}
         </p>
         <div className="hud-actions">
+          <button onClick={toggleMask}>{player.maskOn ? "Снять маску" : "Маска"}</button>
           <button onClick={togglePhone}>ТЕЛЕФОН</button>
           {onBack && <button onClick={onBack}>← МЕНЮ</button>}
         </div>
       </div>
     </div>
   );
-}
-
-function weatherLabel(w: string) {
-  const map: Record<string, string> = {
-    clear: "Ясно",
-    cloudy: "Облачно",
-    rain: "Дождь",
-    storm: "Гроза",
-    fog: "Туман",
-  };
-  return map[w] || w;
 }

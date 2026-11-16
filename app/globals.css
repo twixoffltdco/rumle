@@ -109,3 +109,29 @@ html, body, main.app { width: 100%; height: 100%; overflow: hidden; background: 
   .menu { left: 4%; top: 24%; width: 92%; }
   .hud-bottom p { display: none; }
 }
+
+.prologue { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+.prologue-card {
+  width: min(420px, 90vw); background: #0a0e12f2; border: 1px solid #e5b66c33;
+  padding: 32px 28px; backdrop-filter: blur(12px);
+}
+.prologue-kicker { color: #e5b66c; letter-spacing: 4px; font-size: 11px; margin-bottom: 12px; }
+.prologue-card h1 { font-size: 28px; letter-spacing: 4px; margin-bottom: 14px; }
+.prologue-text { color: #aaa; line-height: 1.55; margin-bottom: 22px; font-size: 14px; }
+.prologue-dots { display: flex; gap: 6px; margin-bottom: 20px; }
+.prologue-dots span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+.prologue-dots span.on { background: #e5b66c; }
+.prologue-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.prologue-actions button { padding: 10px 16px; background: #e5b66c; color: #111; border: none; cursor: pointer; letter-spacing: 1px; font-size: 13px; }
+.prologue-actions button.secondary { background: transparent; color: #888; border: 1px solid #333; }
+.recog-hot { color: #ff6666 !important; display: block; margin-top: 4px; }
+.recog-cold { color: #8fdf8f !important; display: block; margin-top: 4px; }
+.shop-hint {
+  position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%);
+  background: #0a0e12ee; border: 1px solid #e5b66c55; padding: 10px 16px; font-size: 12px; color: #e5b66c;
+}
+.cloth-btn {
+  display: block; width: 100%; text-align: left; margin-bottom: 8px; padding: 12px;
+  background: #141c24; border: 1px solid #2a333c; color: #eee; cursor: pointer; font-size: 13px;
+}
+.cloth-btn:disabled { opacity: 0.5; }
